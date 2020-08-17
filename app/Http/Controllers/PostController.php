@@ -12,7 +12,9 @@ class PostController extends Controller
 
     public function index(){
 
-        $posts = Post::all();
+        $posts = auth()->user()->posts;
+
+
         return view('admin.posts.index', ['posts'=>$posts]);
     }
 
@@ -28,7 +30,7 @@ class PostController extends Controller
 
         $inputs = request()->validate([
             'title'=>'required|min:8|max:255',
-            'post_image'=>'mimes:jpg,png',
+            'post_image'=>'mimes:jpeg,bmp,png,jpg',
             'body' =>'required'
         ]);
 
@@ -63,7 +65,7 @@ class PostController extends Controller
 
         $inputs = request()->validate([
             'title'=>'required|min:8|max:255',
-            'post_image'=>'mimes:jpeg,png,jpg',
+            'post_image'=>'mimes:jpeg,bmp,png,jpg',
             'body' =>'required'
         ]);
 
