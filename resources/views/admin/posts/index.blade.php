@@ -48,17 +48,28 @@
                       <td>
                         <img height="40px" src="{{asset($post->post_image)}}" alt=""></td>
                       <td>{{$post->created_at->diffForHumans()}}</td>
-                      <td><form method="POST" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data" >
-                        @csrf
-                        @method('DELETE')
+                      <td>
+                        @can('view', $post)
 
-                        <button type="submit" class="btn btn-danger">Borrar</button></td>
-                      </form>
+                        <form method="POST" action="{{route('post.destroy', $post->id)}}" enctype="multipart/form-data" >
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit" class="btn btn-danger">Borrar</button></td>
+                        </form>
+
+                        @endcan
                     </tr>
                     @endforeach
                   </tbody>
                 </table>
               </div>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <div class="mx-auto">
+                {{$posts->links()}}
             </div>
           </div>
     @endsection
@@ -70,7 +81,6 @@
       <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
       <!-- Page level custom scripts -->
-      <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
 
     @endsection
 </x-admin-master>
