@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'username','name', 'email', 'password',
     ];
 
     /**
@@ -37,6 +37,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function setPasswordAttribute($value){
+        $this->attributes['password']=bcrypt($value);
+    }
+
     public function posts(){
         return $this->hasMany(Post::class);
     }
@@ -47,5 +51,13 @@ class User extends Authenticatable
 
     public function roles(){
         return $this->belongsToMany(Role::class);
+    }
+
+    public function userHasRole($role_name){
+        foreach($this->roles as $role){
+            if($role==$role->name)
+                return true;
+        }
+        return false;
     }
 }

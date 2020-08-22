@@ -45,6 +45,12 @@
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Register</a>
+            </li>
+
+
           @endif
           <li class="nav-item">
             <a class="nav-link" href="#">Services</a>
@@ -66,7 +72,7 @@
       <div class="col-md-8">
 
         @yield('content')
-      
+
       </div>
 
       <!-- Sidebar Widgets Column -->
