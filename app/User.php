@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username','name', 'email', 'password',
+        'username','name','avatar', 'email', 'password',
     ];
 
     /**
@@ -60,4 +60,13 @@ class User extends Authenticatable
         }
         return false;
     }
+    public function getAvatarAttribute($value)
+    {
+    if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
+    return $value;
+    }
+    return asset('storage/' . $value);
+    }
+
+
 }
