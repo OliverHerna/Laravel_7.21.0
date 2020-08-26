@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -55,11 +56,13 @@ class User extends Authenticatable
 
     public function userHasRole($role_name){
         foreach($this->roles as $role){
-            if($role==$role->name)
+            if(Str::lower($role_name)==Str::lower($role->name))
                 return true;
         }
         return false;
     }
+
+
     public function getAvatarAttribute($value)
     {
     if (strpos($value, 'https://') !== FALSE || strpos($value, 'http://') !== FALSE) {
@@ -67,6 +70,4 @@ class User extends Authenticatable
     }
     return asset('storage/' . $value);
     }
-
-
 }

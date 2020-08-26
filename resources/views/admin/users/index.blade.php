@@ -1,6 +1,12 @@
+
 <x-admin-master>
     @section('content')
         <h1>Users</h1>
+
+        @if(session('user-deleted'))
+            <div class="alert alert-danger">{{session('user-deleted')}}</div>
+        @endif
+
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -17,6 +23,7 @@
                                     <th>Nombre</th>
                                     <th>Fecha de Registro</th>
                                     <th>Fecha de Actualizacion</th>
+                                    <th>Borrar</th>
 
                                 </tr>
                             </thead>
@@ -28,6 +35,7 @@
                                     <th>Nombre</th>
                                     <th>Fecha de Registro</th>
                                     <th>Fecha de Actualizacion</th>
+                                    <th>Borrar</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -41,6 +49,13 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->created_at->diffForhumans()}}</td>
                                     <td>{{$user->updated_at->diffForhumans()}}</td>
+                                    <td>
+                                        <form method="POST" action="{{route('user.destroy', $user->id)}}" enctype="multipart/form-data">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger">Borrar</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Contracts\Session\Session;
 
 class UserController extends Controller
 {
@@ -34,6 +35,14 @@ class UserController extends Controller
         return view('admin.users.index', ['users'=>$users]);
     }
 
+    public function destroy(User $user){
+
+        $user->delete();
+        session()->flash('user-deleted','El usuario ha sido dado de baja del sistema');
+        return back();
+
+
+    }
 
 }
 

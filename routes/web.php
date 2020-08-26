@@ -38,6 +38,13 @@ Route::middleware('auth')->group(function(){
 
     Route::get('admin/users', 'UserController@index')->name('users.index');
 
+    Route::delete('users/{user}/destroy', 'UserController@destroy')->name('user.destroy');
+
 });
 
 Route::get('/admin/posts/{post}/edit', 'PostController@edit')->middleware('can:view,post')->name('post.edit');
+
+Route::middleware('role:admin')->group(function(){
+
+    Route::get('admin/users', 'UserController@index')->name('users.index');
+});
