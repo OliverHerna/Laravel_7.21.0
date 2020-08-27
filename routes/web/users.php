@@ -11,4 +11,6 @@ Route::middleware(['role:admin', 'auth'])->group(function(){
 Route::middleware(['can:view,user'])->group(function(){
     Route::get('users/{user}/profile', 'UserController@show')->name('user.profile.show');
     Route::delete('users/{user}/destroy', 'UserController@destroy')->name('user.destroy');
+
+
 });
