@@ -13,7 +13,7 @@
 
 
         <div class="col-sm-3">
-        <form action="{{route('roles.store')}}" method="post">
+        <form action="{{route('role.store')}}" method="post">
                 @csrf
                 <div class="form-group">
                     <label for="name">Nombre</label>
@@ -56,7 +56,7 @@
                                 <td>{{$role->slug}}</td>
                                 <td>{{$role->created_at}}</td>
                                 <td>
-                                    <form action="{{route('roles.destroy',$role->id) }}" method="post">
+                                    <form action="{{route('role.destroy',$role->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>

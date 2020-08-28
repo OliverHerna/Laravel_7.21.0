@@ -50,9 +50,7 @@ class PostController extends Controller
 
     }
 
-    public function getPostImageAttribute($value){
-        return asset('storage/' . $value);
-     }
+
 
      public function destroy(Post $post){
 
