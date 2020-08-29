@@ -48,17 +48,49 @@
                                     <th>Id</th>
                                     <th>Nombre</th>
                                     <th>Slug</th>
-                                    <th>Borrar</th>
+                                    <th>Attach</th>
+                                    <th>Detach</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($permissions as $permission)
                                     <tr>
-                                        <td><input type="checkbox" name="" id=""></td>
+                                        <td>
+                                            <input type="checkbox" name="" id=""
+                                            @foreach ($role->permissions as $role_permissions)
+                                                @if ($role_permissions->slug == $permission->slug)
+                                                    checked
+                                                @endif
+                                            @endforeach
+                                            >
+                                        </td>
                                         <td>{{$permission->id}}</td>
                                         <td>{{$permission->name}}</td>
                                         <td>{{$permission->slug}}</td>
-                                        <td><button class="btn btn-danger">Borrar</button></td>
+                                        <td>
+                                            <form method="post" action="{{route('role.permission.attach', $role->id)}}">
+                                                @method('PUT')
+                                                @csrf
+                                                <input type="hidden" name="permission" id="permission" value="{{$permission->id}}">
+                                                <button class="btn btn-primary"
+                                                        @if ($role->permissions->contains($permission))
+                                                            disabled
+                                                        @endif
+                                                >Asignar</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" action="{{route('role.permission.detach', $role->id)}}">
+                                                @method('PUT')
+                                                @csrf
+                                                <input type="hidden" name="permission" id="permission" value="{{$permission->id}}">
+                                                <button class="btn btn-danger"
+                                                        @if (!$role->permissions->contains($permission))
+                                                            disabled
+                                                        @endif
+                                                >Desasignar</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                     @endforeach
 
@@ -68,7 +100,9 @@
                                         <th>Nombre</th>
                                         <th>Slug</th>
                                         <th>Fecha de Creación</th>
-                                        <th>Borrar</th>
+                                        <th>Attach</th>
+                                        <th>Detach</th>
+
                                     </tr>
                                 </tfoot>
                         </table>

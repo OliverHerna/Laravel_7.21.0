@@ -59,4 +59,14 @@ class RoleController extends Controller
         session()->flash('role-deleted', 'El rol '. $role->name . ' ha sido eliminado');
         return back();
     }
+
+    public function attach_permission(Role $role){
+        $role->permissions()->attach(request('permission'));
+        return back();
+    }
+
+    public function detach_permission(Role $role){
+        $role->permissions()->detach(request('permission'));
+        return back();
+    }
 }
