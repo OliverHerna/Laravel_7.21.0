@@ -54,10 +54,10 @@
         Interface
       </div>
 
-      <x-admin.sidebar.admin-sidebar-posts-links></x-admin-sidebar-posts-links>
+      <x-admin.sidebar.admin-sidebar-posts-links></x-admin.sidebar.admin-sidebar-posts-links>
 
       @if(auth()->user()->userHasRole('Admin'))
-        <x-admin.sidebar.admin-sidebar-users-links></x-admin-sidebar-users-links>
+        <x-admin.sidebar.admin-sidebar-users-links></x-admin.sidebar.admin-sidebar-users-links>
       @endif
 
       <x-admin.sidebar.authorizations-links></x-admin.sidebar.authorizations-links>
