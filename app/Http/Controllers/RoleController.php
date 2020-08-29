@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Role;
+use App\Permission;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class RoleController extends Controller
@@ -27,6 +28,29 @@ class RoleController extends Controller
             'slug' => Str::of(Str::lower(request('name')))->slug('-')
 
         ]);
+        return back();
+    }
+
+    public function edit(Role $role){
+        return view('admin.roles.edit', [
+            'role'=>$role,
+            'permissions'=>Permission::all()
+        ]);
+    }
+
+    public function update(Role $role){
+        $role->name = Str::ucfirst(request('name'));
+        $role->slug = Str::of(Str::lower(request('name')))->slug('-');
+
+        if($role->isDirty('name')){
+            session()->flash('role-updated', 'El rol fue editado correctamente');
+
+            $role->save();
+        }else{
+            session()->flash('role-updated', 'No se detecto ninguna edición');
+        }
+
+
         return back();
     }
 

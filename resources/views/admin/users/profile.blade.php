@@ -87,6 +87,74 @@
                 </form>
             </div>
         </div>
+        <br>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Datatables Example</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="users-table" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Opciones</th>
+                                    <th>Id</th>
+                                    <th>Nombre</th>
+                                    <th>Slug</th>
+                                    <th>Asignar</th>
+                                    <th>Desasignar</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($roles as $role)
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="" id=""
+                                            @foreach ($user->roles as $user_role)
+                                                @if ($user_role->slug == $role->slug)
+                                                    checked
+                                                @endif
+                                            @endforeach
+                                            >
+                                        </td>
+                                        <td>{{$role->id}}</td>
+                                        <td>{{$role->name}}</td>
+                                        <td>{{$role->slug}}</td>
+                                        <td>
+                                            <form method="post" action="{{route('user.role.attach', $user->id)}}">
+                                                @method('PUT')
+                                                @csrf
+                                                <input type="hidden" name="role" id="role" value="{{$role->id}}">
+                                                <button class="btn btn-primary">Asignar</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" action="{{route('user.role.dettach', $user->id)}}">
+                                                @method('PUT')
+                                                @csrf
+                                                <input type="hidden" name="role" id="role" value="{{$role->id}}">
+                                                <button class="btn btn-danger">Desasignar</button>
+                                            </form>
+                                        </td>
+
+                                    </tr>
+                                    @endforeach
+
+                                <tfoot>
+                                    <tr>
+                                        <th>Opciones</th>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Slug</th>
+                                        <th>Asignar</th>
+                                        <th>Desasignar</th>
+                                    </tr>
+                                </tfoot>
+                        </table>
+                    </div>
+                </div>
+        </div>
 
     @endsection
 </x-admin-master>
