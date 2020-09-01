@@ -89,6 +89,8 @@
         </div>
         <br>
 
+        @if (auth()->user()->userHasRole('Admin'))
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Datatables Example</h6>
@@ -155,6 +157,8 @@
                     </div>
                 </div>
         </div>
+
+        @endif
 
     @endsection
 </x-admin-master>
