@@ -17,10 +17,11 @@ class Role extends Model
     }
 
     public function roleHasPermission($permission_slug){
-        foreach($this->permissions as $permission){
-            if(Str::lower($permission_slug)==Str::lower($permission->slug))
+        foreach($this->permissions as $role_permissions){
+            if($role_permissions->slug==$permission_slug){
                 return true;
+                break;
+            }
         }
-        return false;
     }
 }

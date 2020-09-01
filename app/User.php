@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use App\Role;
 
 class User extends Authenticatable
 {
@@ -69,5 +70,15 @@ class User extends Authenticatable
     return $value;
     }
     return asset('storage/' . $value);
+    }
+
+    public function deletePermission(){
+        foreach($this->roles as $role){
+                if($role->roleHasPermission('eliminar-publicaciones')){
+                    return true;
+                    break;
+                }
+        }
+
     }
 }

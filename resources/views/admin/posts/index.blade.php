@@ -55,7 +55,12 @@
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit" class="btn btn-danger">Borrar</button></td>
+                            <button type="submit" class="btn btn-danger"
+                            @if (!Auth::user()->deletePermission(auth()->user()))
+                                disabled
+                            @endif
+
+                            >Borrar</button></td>
                         </form>
 
                         @endcan
